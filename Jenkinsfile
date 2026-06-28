@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clonar') {
             steps {
-                git 'https://github.com/samuka1giga/FranX-app.git'
+                checkout scm
             }
         }
         stage('Instalar dependencias') {
