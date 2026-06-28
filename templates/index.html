@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>FranX - Traductor Web</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 50px auto; background: #1a1a2e; color: #eee; }
+    h1 { text-align: center; color: #e94560; }
+    textarea { width: 100%; height: 120px; padding: 10px; border-radius: 8px; background: #16213e; color: #eee; border: 1px solid #e94560; font-size: 16px; }
+    select, button { margin-top: 10px; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer; }
+    button { background: #e94560; color: white; font-size: 16px; width: 100%; }
+    #resultado { margin-top: 20px; padding: 15px; background: #16213e; border-radius: 8px; min-height: 80px; }
+  </style>
+</head>
+<body>
+  <h1>FranX Traductor</h1>
+  <textarea id="texto" placeholder="Escribe el texto a traducir..."></textarea>
+  <br>
+  Desde: <select id="origen"><option value="es">Español</option><option value="en">Inglés</option><option value="fr">Francés</option></select>
+  Hacia: <select id="destino"><option value="en">Inglés</option><option value="es">Español</option><option value="fr">Francés</option></select>
+  <button onclick="traducir()">Traducir</button>
+  <div id="resultado">La traducción aparecerá aquí...</div>
+  <script>
+    async function traducir() {
+      const texto = document.getElementById('texto').value;
+      const origen = document.getElementById('origen').value;
+      const destino = document.getElementById('destino').value;
+      const res = await fetch('/traducir', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({texto, origen, destino}) });
+      const data = await res.json();
+      document.getElementById('resultado').innerText = data.traduccion;
+    }
+  </script>
+</body>
+</html>
