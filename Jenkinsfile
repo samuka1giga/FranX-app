@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Instalar dependencias') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt --break-system-packages'
             }
         }
         stage('Prueba de ejecucion') {
