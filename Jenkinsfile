@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Instalar dependencias') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt'
             }
         }
         stage('Prueba de ejecucion') {
             steps {
-                sh 'python -c "from app import app; print(app)"'
+                sh 'python3 -c "from app import app; print(app)"'
             }
         }
     }
